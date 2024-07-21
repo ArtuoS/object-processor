@@ -1,0 +1,22 @@
+services:
+  object-processor:
+    build: .
+    environment:
+      FOLDER_PATH: /app/data
+      S3_BUCKET: ${S3_BUCKET}
+      DELETE_FILES_AFTER_UPLOAD: ${DELETE_FILES_AFTER_UPLOAD}
+      PUBLISH_SQS_EVENTS: ${PUBLISH_SQS_EVENTS}
+      SQS_QUEUE: ${SQS_QUEUE}
+      AWS_REGION: ${AWS_REGION}
+      AWS_ID: ${AWS_ID}
+      AWS_SECRET: ${AWS_ID}
+    volumes:
+      - folder_data:/app/data
+
+volumes:
+  folder_data:
+    driver: local
+    driver_opts:
+      type: none
+      device: ${DEVICE_PATH}
+      o: bind
